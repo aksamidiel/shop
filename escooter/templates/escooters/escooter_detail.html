@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% load custom_filters %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block style %}
+    <style type="text/css">
+        table {
+            margin: 15px;
+            width: 800px;
+        }
+        tr {
+            height: 15%;
+        }
+        td {
+            padding: 7px;
+        }
+    </style>
+{% endblock %}
+
+{% block form %}{% endblock %}
+
+{% block content %}
+<div class="container">
+{% load crispy_forms_tags %}
+    <table align="center">
+        <tr>
+            <td rowspan="5" width="300px" align="center"><img src="{{ object.image.url }}" alt="Обложка книги" width="auto" height="400px"></td>
+            <td height="15%"><h3>{{ object.name }}</h3></td>
+        </tr>
+        <tr>
+            <td height="70px">
+                {% for author_name in object.author.all %}
+                    <h4>{{ author_name }}</h4>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td height="70px">
+                <h3>{{ object.price }} BYN</h3>
+            </td>
+        </tr>
+        <tr>
+            <td height="70px">
+                {% if object.available %}
+                    <a href="{% url 'add-to-cart' object.pk %}" class="btn btn-primary">Положить в корзину
+                        <img src="https://img.icons8.com/doodle/24/000000/wheelbarrow.png"></a>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td height="120px">
+                {{ object.description|default:"" }}
+            </td>
+        </tr>
+    </table>
+    <p><em>Только зарегистрированные пользователи могут оставлять комментарии</em></p>
+    {% if object.commented_book.all %}
+        <div class="card" style="width: 35rem;">
+            {% with last_comment=object.commented_book.all|ordered_comments %}
+                <p>{{ last_comment.0.comment_to_book }}</p>
+                <h6 class="card-subtitle mb-2 text-muted">Пользователь {{ last_comment.0.commented_user }},
+                {{ last_comment.0.created_day|date:"j E Y, G:i" }}</h6>
+            {% endwith %}
+        </div>
+    {% endif %}
+    <table>
+        <tr>
+            <th>Серия</th>
+            <td>{{ object.serie }}</td>
+        </tr>
+        <tr>
+            <th>Жанр</th>
+            <td>{% for genre_name in object.genre.all %}
+                    {{ genre_name }}<br>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>Издательство</th>
+            <td>
+                {{ object.publish }}
+            </td>
+        </tr>
+        <tr>
+            <th>Год издания</th>
+            <td>{{ object.year}}</td>
+        </tr>
+        <tr>
+            <th>Страниц</th>
+            <td>{{ object.page }}</td>
+        </tr>
+        <tr>
+            <th>Переплет</th>
+            <td>{{ object.bind }}</td>
+        </tr>
+        <tr>
+            <th>Формат</th>
+            <td>{{ object.book_format }}</td>
+        </tr>
+        <tr>
+            <th>ISBN</th>
+            <td>{{ object.isbn }}</td>
+        </tr>
+        <tr>
+            <th>Вес, гр</th>
+            <td>{{ object.weight }}</td>
+        </tr>
+        <tr>
+            <th>Кол-во книг</th>
+            <td>{{ object.book_amount }}</td>
+        </tr>
+        <tr>
+            <th>Наличие</th>
+            <td>
+                {{ object.available|filter_available }}
+            </td>
+        </tr>
+        <tr>
+            <th>Рейтинг</th>
+            <td>{{ object.rate }}</td>
+        </tr>
+    </table>
+    <h4>Все комментарии</h4>
+        {% for comment in object.commented_book.all|ordered_comments %}
+            <div class="card" style="width: 50rem; margin: 1rem";>
+                <p>{{ comment.comment_to_book }}</p>
+                <h6 class="card-subtitle mb-2 text-muted">Пользователь {{ comment.commented_user }},
+                    {{ comment.created_day|date:"j E Y, G:i" }}</h6>
+            </div>
+        {% empty %}
+            <p>На эту книгу нет ни одного комментария. Вы можете оставить его первым!</p>
+        {% endfor %}
+    {% if user.is_authenticated %}
+        <form action="{% url 'comment-create' %}" method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="Оставить комментарий" class="btn btn-primary">
+        </form>
+    {% endif %}
+</div>
+ {% endblock %}

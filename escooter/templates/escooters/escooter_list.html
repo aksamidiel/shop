@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %} Электросамокаты {% endblock %}
+
+{% block style %}
+    <style type="text/css">
+        div div {display: inline-block}
+        table {width: 300px; height: 350px; margin: 20px }
+    </style>
+{% endblock %}
+
+{% block create %}
+    <a href="{% url 'book-create-view' %}" class="btn btn-success mr-sm-2">Добавить книгу</a>
+{% endblock %}
+
+{% block content %}
+    <div>
+        {% for object in object_list %}
+            <div>
+                <table>
+                    <tr>
+                        <td width="300px" height="250px">
+                            <img src="{{ object.image.url }}" alt="Обложка книги" width="auto" height="250px">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200px">
+                            <strong>{{ object.name }}</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200px">
+                            {% for author_name in object.author.all %}
+                                {{ author_name }}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="200px" height="40px">
+                            <a href="{% url 'book-detail-view' object.pk %}" class="btn btn-primary">Подробнее</a>
+                            {% if object.available %}
+                                <a href="{% url 'add-to-cart' object.pk %}?next=/books/all" class="btn btn-light">
+                                    <img src="https://img.icons8.com/doodle/24/000000/wheelbarrow.png">
+                                </a>
+                            {% endif %}
+                            {% if perms.books.edit_content %}
+                                <a href="{% url 'book-update-view' object.pk %}"><img src="https://img.icons8.com/wired/24/000000/pencil.png"></a>
+                                <a href="{% url 'book-delete-view' object.pk %}"><img src="https://img.icons8.com/ios/24/000000/close-window-filled.png"></a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
