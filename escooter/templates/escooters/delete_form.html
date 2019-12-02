@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}Удалить книгу{% endblock %}
+{% block title %}Удалить заказ{% endblock %}
 
 {% block form %}{% endblock %}
 
 {% block content %}
     <form method="post">
             {% csrf_token %}
-            <p>Вы уверены, что хотите удалить книгу "{{ object }}"?</p>
+            <p>Вы уверены, что хотите удалить заказ "{{ object }}"?</p>
         <input type="submit" value="Delete" name="delete" class="btn btn-danger">
-        <a href="{% url 'book-list-view' %}" class="btn btn-primary">No</a>
+        <a href="{% url 'escooter-list-view' %}" class="btn btn-primary">No</a>
     </form>
 {% endblock %}

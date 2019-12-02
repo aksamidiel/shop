@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load custom_filters_cart %}
+
+{% block title %}Заказы{% endblock %}
+
+{% block content %}
+    <div class="container">
+    {% if object_list %}
+        <table  cellspacing="5px" class="table table-hover">
+            <tr>
+                <th></th>
+                <th>Дата создания заказа</th>
+                <th>Статус</th>
+                <th>Товары</th>
+                <th>Сумма заказа</th>
+            </tr>
+            {% for object in object_list %}
+                {% if object.order_cart.all %}
+                    <tr>
+                        {% for product in object.order_cart.all %}
+                            <td>
+                                <a href="{% url 'order-success' product.pk %}" class="btn btn-info ml-sm-2">Подробнее</a>
+                            </td>
+                            <td>
+                                {{ product.created_day|date:"j E Y, G:i" }}
+                            </td>
+                            <td>
+                                {{ product.status }}
+                                <p class="text-danger font-weight-bold">{{ product.canceled|filter_canceled }}</p>
+                            </td>
+                        {% endfor %}
+                        <td>
+                            {% for product in object.user_cart.all %}
+                                {{ product.book.name }}<br>
+                            {% endfor %}
+                        </td>
+                        <td>{{ object.total_cart_price }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    {% else %}
+        <h1 align="center">У Вас еще нет ни одного заказа!</h1>
+    {% endif %}
+    </div>
+{% endblock %}

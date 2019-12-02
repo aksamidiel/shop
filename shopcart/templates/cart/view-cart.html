@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Корзина{% endblock %}
+
+{% block form %}{% endblock %}
+
+{% block content %}
+
+    {% load crispy_forms_tags %}
+
+    {% if object.books_in_cart_count > 0 %}
+        <div class="container">
+            <table  align="center" cellspacing="5px" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Книга</th>
+                    <th>Кол-во</th>
+                    <th>Цена за шт.</th>
+                    <th>Цена всего</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in object.user_cart.all %}
+                    <tr>
+                        <td>{{ product.pk }}</td>
+                        <td>{{ product.book.name }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>{{ product.book.price }}</td>
+                        <td>{{ product.price_total }}</td>
+                        <td><a href="{% url 'delete-from-cart' product.pk %}" class="btn btn-danger">Удалить из корзины</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td>Итого</td>
+                    <td>{{ object.books_in_cart_count }}</td>
+                    <td></td>
+                    <td>{{ object.total_cart_price }}</td>
+                </tr>
+            </tfoot>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                    <H5>Заполните форму для оформления заказа</H5>
+                    <form action="{% url 'order-create' %}" method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <input type="submit" value="Оформить заказ" class="btn btn-primary">
+                        <input type="button" value="Back" onclick="history.back();" class="btn btn-danger">
+                    </form>
+            </div>
+        </div>
+    {% else %}
+        <h2 align="center">Ваша корзина пуста!</h2>
+    {% endif %}
+{% endblock %}

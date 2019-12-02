@@ -5,11 +5,20 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import DeleteView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse_lazy
+from shop.shopcart.models import Cart
 from .models import EScooter
 from .forms import EScooterForm
+from django.db.models import Q
 
 
 # Create your views here.
+def escooter_quantity_in_cart(self, context):
+    cart_id = self.request.session.get('cart_id', '0')
+    if cart_id != '0':
+        context['quantity'] = Cart.objects.get(pk=cart_id).escooters_in_cart_count
+    else:
+        context['quantity'] = cart_id
+    return context
 
 
 class EScooterList(ListView):
@@ -19,7 +28,7 @@ class EScooterList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['logout_redirect'] = '/escooters/all'
-        escooter_quantity_in_cart(self, context)
+        #escooter_quantity_in_cart(self, context)
         return context
 
     def get_queryset(self, **kwargs):
@@ -37,10 +46,7 @@ class EScooterDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['logout_redirect'] = 'escooters/escooter/{}'.format(self.object.pk)
-        checkout_form = CommentCreateForm()
-        checkout_form.fields['commented_escooter'].initial = self.object
-        checkout_form.fields['commented_user'].initial = self.request.user
-        context['form'] = checkout_form
+
         escooter_quantity_in_cart(self, context)
         return context
 
@@ -58,16 +64,16 @@ class EScooterCreate(PermissionRequiredMixin, CreateView):
             return reverse_lazy('escooter-list-view')
         return reverse_lazy('escooter-create-view')
 
-class EscooterUpdate(PermissionRequiredMixin, UpdateView):
+class EScooterUpdate(PermissionRequiredMixin, UpdateView):
     model = EScooter
-    template_name = 'books/update_form.html'
+    template_name = 'escooters/update_form.html'
     form_class = EScooterForm
-    permission_required = 'books.edit_content'
+    permission_required = 'escooters.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
-            return reverse_lazy('book-detail-view', kwargs={'pk': self.object.pk})
-        return reverse_lazy('book-list-view')
+            return reverse_lazy('escooter-detail-view', kwargs={'pk': self.object.pk})
+        return reverse_lazy('escooter-list-view')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -75,7 +81,7 @@ class EscooterUpdate(PermissionRequiredMixin, UpdateView):
         return context
 
 
-class EscooterDelete(PermissionRequiredMixin, DeleteView):
+class EScooterDelete(PermissionRequiredMixin, DeleteView):
     model = EScooter
     template_name = 'escooters/delete_form.html'
     permission_required = 'escooters.edit_content'

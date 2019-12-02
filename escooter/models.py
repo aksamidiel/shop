@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 class EScooter(models.Model):
@@ -21,12 +22,12 @@ class EScooter(models.Model):
         decimal_places=2)
 
     serie = models.ForeignKey(
-            "reference.Series",
-            related_name="books",
-            verbose_name="Серия",
-            null=True,
-            blank=True,
-            on_delete=models.PROTECT)
+        "reference.Series",
+        related_name="books",
+        verbose_name="Серия",
+        null=True,
+        blank=True,
+        on_delete=models.PROTECT)
 
     description = models.TextField(
         "Описание модели",
@@ -86,5 +87,5 @@ class EScooter(models.Model):
     class Meta:
         verbose_name = 'Электро скутер'
         verbose_name_plural = 'Скутеры'
-        permissions = [('edit_content', 'content manager'), ('edit_order', 'order manager'),   # разрешения на редакцию
+        permissions = [('edit_content', 'content manager'), ('edit_order', 'order manager'),  # разрешения на редакцию
                        ('market', 'for marketers')]

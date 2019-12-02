@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Добавление заказа{% endblock %}
+
+{% block form %}{% endblock %}
+
+{% block content %}
+    <H3>Вы хотите добавить заказ "{{ object.escooter.name }}"?</H3>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form }}<br>
+            <input type="hidden" name="next" value="{{ next }}">
+            {% comment %}
+            <button type="submit" class="btn btn-success">Добавить в корзину</button>
+            <button type="submit" class="btn btn-danger" name="do_not_add">Нет</button>
+            <a href="{% url 'book-list-view' %}" class="btn btn-danger">No</a>
+            {% endcomment %}
+            <input type="submit" value="Add" name="add" class="btn btn-success">
+            <input type="submit" value="No" name="back" class="btn btn-danger">
+        </form>
+{% endblock %}

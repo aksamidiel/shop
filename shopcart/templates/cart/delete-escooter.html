@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Удалить товар из корзины</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body>
+        <form method="post">
+            {% csrf_token %}
+            <p>Вы хотите удалить "{{ object }}" из корзины?</p>
+            <input type="submit" value="Delete" name="delete" class="btn btn-danger">
+            <a href="{% url 'view-cart' %}" class="btn btn-secondary">No</a>
+        </form>
+    </body>
+</html>
