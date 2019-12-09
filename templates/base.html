@@ -25,11 +25,11 @@
                     </li>
                 </ul>
 
-                {% if perms.books.edit_content %}
+                {% if perms.escooter.edit_content %}
                     {% block create %}{% endblock %}
                 {% endif %}
 
-                {% if perms.books.edit_order %}
+                {% if perms.escooter.edit_order %}
                     <a href="{% url 'order-list' %}" class="btn btn-success mr-sm-2">Все заказы</a>
                 {% endif %}
 
@@ -55,15 +55,15 @@
                 {% endif %}
 
                 {% block form %}
-                    <form action="{% url 'book-list-view' %}" class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" name="search_book" placeholder="Книга, автор" aria-label="Search">
+                    <form action="{% url 'escooter-list-view' %}" class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" name="search_escooter" placeholder="Самокат, компания" aria-label="Search">
                         <button class="btn btn-outline-success my-0 my-sm-0" type="submit">
                             <img src="https://img.icons8.com/dusk/20/000000/detective.png" alt="Search">
                         </button>
                     </form>
                 {% endblock %}
 
-                <a href="{% url 'view-cart' %}" class="btn btn-warning ml-sm-2">Моя корзина ({{ quantity }})</a>
+                <a href="{% url 'view-cart' %}" class="btn btn-warning ml-sm-2">корзина ({{ quantity }})</a>
             </div>
         </nav>
 

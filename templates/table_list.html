@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Some title{% endblock %}
+{% block title %}Заголовок{% endblock %}
 
 {% block style %}
     <style type="text/css">
@@ -22,7 +22,7 @@
         <div class="col-3"></div>
         <div class="col-6">
             <table  align="center" cellspacing="5px" class="table">
-            <caption> {% block caption %} НАЗВАНИЕ СПРАВОЧНИКА {% endblock %} </caption>
+            <caption> {% block caption %} НАЗВАНИЕ КАТАЛОГА {% endblock %} </caption>
                 <tr>
                     <td>
                         <form method="get" action="" class="form-inline my-2 my-lg-0">
@@ -45,7 +45,7 @@
                                 {% block delete %}{% endblock %}<img src="https://img.icons8.com/ios/20/000000/close-window-filled.png"></a>
                             {% endif %}
                             {% if object.available %}
-                                <a href="{% url 'add-to-cart' object.pk %}?next=/books/all" class="btn btn-light"><img src="https://img.icons8.com/doodle/36/000000/wheelbarrow.png"></a>
+                                <a href="{% url 'add-to-cart' object.pk %}?next=/escooter/all" class="btn btn-light"><img src="https://img.icons8.com/doodle/36/000000/wheelbarrow.png"></a>
                             {% endif %}
                         </td>
                     </tr>
