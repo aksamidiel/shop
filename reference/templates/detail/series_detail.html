@@ -1,0 +1,15 @@
+{% extends "reference/detail/ref_detail.html" %}
+
+{% block title %}Серия{% endblock %}
+
+{% block table %}
+    <caption>СЕРИИ</caption>
+        <tr>
+            <th>Название_серии</th>
+            <td>{{ object.name }}</td>
+        </tr>
+        <tr>
+            <th>Описание</th>
+            <td>{{ object.description }}</td>
+        </tr>
+{% endblock %}

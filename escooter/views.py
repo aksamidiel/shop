@@ -5,7 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import DeleteView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse_lazy
-from shop.shopcart.models import Cart
+from shopcart.models import Cart
 from .models import EScooter
 from .forms import EScooterForm
 from django.db.models import Q
@@ -28,7 +28,7 @@ class EScooterList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['logout_redirect'] = '/escooters/all'
-        #escooter_quantity_in_cart(self, context)
+        escooter_quantity_in_cart(self, context)
         return context
 
     def get_queryset(self, **kwargs):
@@ -63,6 +63,7 @@ class EScooterCreate(PermissionRequiredMixin, CreateView):
         elif self.request.POST.get('list'):
             return reverse_lazy('escooter-list-view')
         return reverse_lazy('escooter-create-view')
+
 
 class EScooterUpdate(PermissionRequiredMixin, UpdateView):
     model = EScooter

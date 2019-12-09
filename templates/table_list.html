@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Some title{% endblock %}
+
+{% block style %}
+    <style type="text/css">
+        td {
+            padding: 7px;
+        }
+        caption {
+            font-size: 2em;
+            color: black;
+            caption-side: top;
+        }
+    </style>
+{% endblock %}
+
+{% block create %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <table  align="center" cellspacing="5px" class="table">
+            <caption> {% block caption %} НАЗВАНИЕ СПРАВОЧНИКА {% endblock %} </caption>
+                <tr>
+                    <td>
+                        <form method="get" action="" class="form-inline my-2 my-lg-0">
+                            <input type="search" name="name" class="form-control mr-sm-2" placeholder="Искать">
+                            <button class="btn btn-outline-light my-0 my-sm-0" type="submit">
+                                <img src="https://img.icons8.com/doodle/24/000000/search.png" alt="Search">
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% for object in object_list %}
+                    <tr>
+                        <td width="70%">
+                            {% block detail %}{% endblock %}
+                        </td>
+                        <td>
+                            {% if perms.books.edit_content %}
+                                {% block detail_two %}{% endblock %}<img src="https://img.icons8.com/ios-glyphs/20/000000/illuminati.png"></a>
+                                {% block update %}{% endblock %}<img src="https://img.icons8.com/wired/20/000000/pencil.png"></a>
+                                {% block delete %}{% endblock %}<img src="https://img.icons8.com/ios/20/000000/close-window-filled.png"></a>
+                            {% endif %}
+                            {% if object.available %}
+                                <a href="{% url 'add-to-cart' object.pk %}?next=/books/all" class="btn btn-light"><img src="https://img.icons8.com/doodle/36/000000/wheelbarrow.png"></a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% comment %}
+    https://icons8.ru/icons/
+{% endcomment %}

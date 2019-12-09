@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    {% load static %}
+        <meta charset="UTF-8">
+        <title>{% block title %}Some title{% endblock %}</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        {% block style %}
+
+        {% endblock %}
+    </head>
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e5ffb2;">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'latest-list-view' %}">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'all-references' %}">Каталог</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'escooter-list-view' %}">Все модели</a>
+                    </li>
+                </ul>
+
+                {% if perms.books.edit_content %}
+                    {% block create %}{% endblock %}
+                {% endif %}
+
+                {% if perms.books.edit_order %}
+                    <a href="{% url 'order-list' %}" class="btn btn-success mr-sm-2">Все заказы</a>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                    <div class="dropdown mr-sm-2">
+                        <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ user }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="{% url 'view-user' user.pk %}">Мой профиль</a>
+                            <a class="dropdown-item" href="{% url 'cart-user-list' %}">Мои заказы</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'log-out' %}{% if logout_redirect %}?next={{ logout_redirect }}{% endif %}">Выйти</a>
+                        </div>
+                    </div>
+{#                    <a href="{% url 'log-out' %}{% if logout_redirect %}?next={{ logout_redirect }}{% endif %}"#}
+{#                       class="btn btn-primary ml-sm-2 mr-sm-2">Log out</a>#}
+                {% endif %}
+                {% if user.is_anonymous %}
+                    <a href="{% url 'create-user' %}" class="btn btn-primary mr-sm-2">Register</a>
+                    <a href="{% url 'log-in' %}{% if logout_redirect %}?next={{ logout_redirect }}{% endif %}"
+                       class="btn btn-primary mr-sm-2">Log in</a>
+                {% endif %}
+
+                {% block form %}
+                    <form action="{% url 'book-list-view' %}" class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" name="search_book" placeholder="Книга, автор" aria-label="Search">
+                        <button class="btn btn-outline-success my-0 my-sm-0" type="submit">
+                            <img src="https://img.icons8.com/dusk/20/000000/detective.png" alt="Search">
+                        </button>
+                    </form>
+                {% endblock %}
+
+                <a href="{% url 'view-cart' %}" class="btn btn-warning ml-sm-2">Моя корзина ({{ quantity }})</a>
+            </div>
+        </nav>
+
+        {% block content %}
+        {% endblock %}
+        {% comment %}
+            <form method="get" action="">
+                {{ search_name }}
+            </form>
+        {% endcomment %}
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>

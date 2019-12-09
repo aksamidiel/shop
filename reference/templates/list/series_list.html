@@ -1,0 +1,17 @@
+{% extends "table_list.html" %}
+
+{% block title %}Серии{% endblock %}
+
+{% block create %}<a href="{% url 'serie-create-view' %}" class="btn btn-success mr-sm-2">Добавить серию</a>{% endblock %}
+
+{% block caption %} СЕРИИ {% endblock %}
+
+{% block detail %}<a href="{% url 'serie-detail-view' object.pk %}"> {{ object.name }} </a>{% endblock %}
+
+{% block detail_two %}<a href="{% url 'serie-detail-view' object.pk %}">{% endblock %}
+
+{% block update %}<a href="{% url 'serie-update-view' object.pk %}">{% endblock %}
+
+{% block delete %}<a href="{% url 'serie-delete-view' object.pk %}">{% endblock %}
+
+{% block cart %}{% endblock %}

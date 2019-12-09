@@ -1,0 +1,17 @@
+{% extends "table_list.html" %}
+
+{% block title %}Компании производители{% endblock %}
+
+{% block create %}<a href="{% url 'manufacturer-create-view' %}" class="btn btn-success mr-sm-2">Добавить компанию</a>{% endblock %}
+
+{% block caption %} Компании {% endblock %}
+
+{% block detail %}<a href="{% url 'manufacturer-detail-view' object.pk %}"> {{ object.name }} {{ object.country }}</a>{% endblock %}
+
+{% block detail_two %}<a href="{% url 'manufacturer-detail-view' object.pk %}">{% endblock %}
+
+{% block update %}<a href="{% url 'manufacturer-update-view' object.pk %}">{% endblock %}
+
+{% block delete %}<a href="{% url 'manufacturer-delete-view' object.pk %}">{% endblock %}
+
+{% block cart %}{% endblock %}

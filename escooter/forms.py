@@ -14,6 +14,6 @@ class EScooterForm(ModelForm):
                   'year',
                   'identityNum',
                   'weight',
-                  'scooter_amount',
+                  'escooter_amount',
                   'available',
                   'rate']

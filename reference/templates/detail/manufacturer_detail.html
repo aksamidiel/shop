@@ -1,0 +1,15 @@
+{% extends "reference/detail/ref_detail.html" %}
+
+{% block title %}{{ object.name }} {{ object.country }}{% endblock %}
+
+{% block table %}
+    <caption>Производитель</caption>
+        <tr>
+            <th>Название_компании</th>
+            <td>{{ object.name }}</td>
+        </tr>
+        <tr>
+            <th>Страна</th>
+            <td>{{ object.country }}</td>
+        </tr>
+{% endblock %}

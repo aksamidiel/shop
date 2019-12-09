@@ -1,0 +1,35 @@
+{% extends "table_list.html" %}
+
+{% block title %}Каталоги электросамокатов{% endblock %}
+
+{% block style %}
+    <style type="text/css">
+        table {
+            width: 300px;
+        }
+        th {
+            padding: 7px !important;
+            border: solid dodgerblue 2px;
+            
+            font-family: Arial;
+            font-size: 20px;
+        }
+        caption {
+            font-size: 2em;
+            color: black;
+            caption-side: top;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <table align="center" cellspacing="5">
+        <caption>Каталоги</caption>
+        <tr>
+            <th><a href="{% url 'manufacturer-list-view' %}">Компании_производители</a></th>
+        </tr>
+        <tr>
+            <th><a href="{% url 'serie-list-view' %}">Серии_самокатов</a></th>
+        </tr>
+    </table>
+{% endblock %}

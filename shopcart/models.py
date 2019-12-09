@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from shop.escooter.models import EScooter
+from escooter.models import EScooter
 
 User = get_user_model()
 
