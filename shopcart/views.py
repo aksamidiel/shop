@@ -17,7 +17,7 @@ from shop.escooter.views import escooter_quantity_in_cart
 class AddEscooterToCart(UpdateView):
     model = EScooterInCart
     form_class = AddEScooterForm
-    template_name = 'cart/add-escooter.html'
+    template_name = 'cart/add-escooters.html'
 
     def get_object(self, queryset=None):
         cart_id = self.request.session.get('cart_id')
@@ -77,7 +77,7 @@ class CartView(DetailView):
 
 class DeleteBookFromCart(DeleteView):
     model = EScooterInCart
-    template_name = 'cart/delete-escooter.html'
+    template_name = 'cart/delete-escooters.html'
 
     def get_success_url(self):
         return reverse_lazy('view-cart')

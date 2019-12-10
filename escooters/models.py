@@ -87,5 +87,6 @@ class EScooter(models.Model):
     class Meta:
         verbose_name = 'Электро скутер'
         verbose_name_plural = 'Скутеры'
-        permissions = [('edit_content', 'content manager'), ('edit_order', 'userorder manager'),  # разрешения на редакцию
-                       ('market', 'for marketers')]
+        permissions = [('edit_content', 'content manager'), ('edit_order', 'order manager'),
+                       ('market', 'for marketers')]    # разрешения
+

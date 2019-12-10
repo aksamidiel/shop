@@ -1,5 +1,5 @@
 from reference.models import *
-from escooter.models import *
+from escooters.models import *
 
 
 # функции, которые создают объекты каталогов

@@ -72,4 +72,4 @@ class OrderCanceled(UpdateView):
         if self.request.user.is_authenticated:
             return reverse_lazy('shopcart-user-list')
         if self.request.user.is_anonymous:
-            return reverse_lazy('escooter-list-view')
+            return reverse_lazy('escooters-list-view')

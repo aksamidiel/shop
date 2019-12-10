@@ -6,7 +6,7 @@ from shopcart.models import User
 
 class CommentProduct(models.Model):
     commented_order = models.ForeignKey(
-        'escooter.EScooter',
+        'escooters.EScooter',
         related_name='commented_order',
         verbose_name='Заказ с комментом',
         on_delete=models.CASCADE

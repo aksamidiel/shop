@@ -1,5 +1,5 @@
 from django.urls import path
-from escooter.views import *
+from .views import *
 
 urlpatterns = [
     path('all', EScooterList.as_view(), name='escooter-list-view'),

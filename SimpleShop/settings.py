@@ -41,7 +41,7 @@ DEFAULT_APPS = [
 ]
 
 MY_APPS = [
-    'escooter',
+    'escooters',
     'shopcart',
     'reference',
     'loginsys',

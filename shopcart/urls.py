@@ -1,10 +1,10 @@
 from django.urls import path
-from escooter.views import *
+from escooters.views import *
 
 urlpatterns = [
-    path('all', EScooterList.as_view(), name='escooter-list-view'),
-    path('escooter/<int:pk>', EScooterDetail.as_view(), name='escooter-detail-view'),
-    path('escooter-create/', EScooterCreate.as_view(), name='escooter-create-view'),
-    path('escooter-update/<int:pk>', EScooterUpdate.as_view(), name='escooter-update-view'),
-    path('escooter-delete/<int:pk>', EScooterDelete.as_view(), name='escooter-delete-view'),
+    path('all', EScooterList.as_view(), name='escooters-list-view'),
+    path('escooters/<int:pk>', EScooterDetail.as_view(), name='escooters-detail-view'),
+    path('escooters-create/', EScooterCreate.as_view(), name='escooters-create-view'),
+    path('escooters-update/<int:pk>', EScooterUpdate.as_view(), name='escooters-update-view'),
+    path('escooters-delete/<int:pk>', EScooterDelete.as_view(), name='escooters-delete-view'),
 ]

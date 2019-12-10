@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse_lazy
 from .forms import *
 from .models import *
-from escooter.views import escooter_quantity_in_cart
+from escooters.views import escooter_quantity_in_cart
 
 
 # Create your views here.
@@ -99,7 +99,7 @@ class ManufacturerCreate(PermissionRequiredMixin, CreateView):
     template_name = 'reference/form/create_form.html'
     form_class = ManufacturerForm
 
-    # permission_required = 'escooter.edit_content'
+    # permission_required = 'escooters.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -114,7 +114,7 @@ class SerieCreate(PermissionRequiredMixin, CreateView):
     template_name = 'reference/form/create_form.html'
     form_class = SerieForm
 
-    # permission_required = 'escooter.edit_content'
+    # permission_required = 'escooters.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -129,7 +129,7 @@ class ManufacturerUpdate(PermissionRequiredMixin, UpdateView):
     template_name = 'reference/form/update_form.html'
     form_class = ManufacturerForm
 
-    # permission_required = 'escooter.edit_content'
+    # permission_required = 'escooters.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -141,7 +141,7 @@ class SerieUpdate(PermissionRequiredMixin, UpdateView):
     model = Series
     template_name = 'reference/form/update_form.html'
     form_class = SerieForm
-    #permission_required = 'escooter.edit_content'
+    #permission_required = 'escooters.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
