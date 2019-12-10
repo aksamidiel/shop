@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Заказы{% endblock %}
+
+{% block content %}
+    <div class="container">
+    <h2>ЗАКАЗЫ</h2>
+        <table  cellspacing="5px" class="table table-hover">
+            <tr>
+               <th>
+                   Пользователь
+               </th>
+                <th>
+                   Статус заказа
+               </th>
+                <th>
+                   Количество
+               </th>
+                <th>
+                   Общая стоимость заказа
+               </th>
+                <td>
+
+               </td>
+            </tr>
+            {% for object in object_list %}
+                <tr>
+                    <td>
+                        {{ object.cart.user }}
+                    </td>
+                    <td>
+                        {{ object.status }}<br>
+                        {% if object.canceled %}
+                            <p class="text-danger font-weight-bold">ОТМЕНЕН</p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ object.cart.escooters_in_cart_count }}
+                    </td>
+                    <td>
+                        {{ object.cart.total_cart_price }}
+                    </td>
+                    <td>
+                        <a href="{% url 'order-update' object.pk %}">Перейти</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

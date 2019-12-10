@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% load crispy_forms_tags %}
+
+    <div class="container">
+        <h4>Вы действительно хотите отменить?  {{ object.shopcart.total_cart_price }} BYN:</h4>
+        <h5>
+            {% for product in object.shopcart.user_cart.all %}
+                {{ product.escooter.name }}, {{ product.quantity }} шт.<br>
+            {% endfor %}
+        </h5>
+
+        <form method="post">
+                {% csrf_token %}
+                <input type="submit" value="Отменить заказ" class="btn btn-danger">
+                <input type="button" value="Назад" onclick="history.back();" class="btn btn-info">
+        </form>
+    </div>
+{% endblock %}

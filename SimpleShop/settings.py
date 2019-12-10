@@ -44,7 +44,8 @@ MY_APPS = [
     'escooter',
     'shopcart',
     'reference',
-
+    'loginsys',
+    'userorder',
     'comments'
 ]
 

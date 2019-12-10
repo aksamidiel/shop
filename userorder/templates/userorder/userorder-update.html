@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% block style %}
+    <style type="text/css">
+        .update_order_form {
+            width: 200px;
+        }
+    </style>
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+<div class="container">
+    <h2>{{ object }}</h2>
+    <h3>{{ object.cart }}</h3>
+    {% if object.canceled %}
+        <h2 class="text-danger font-weight-bold">ОТМЕНЕН</h2>
+    {% endif %}
+
+    {% if perms.escooter.edit_order %}
+        <div class="update_order_form">
+            <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input type="submit" value="Изменить статус" class="btn btn-success my-2">
+            </form>
+        </div>
+    {% endif %}
+    <input type="button" value="К списку заказов" onclick="history.back();" class="btn btn-info my-2">
+
+    <table class="table table-striped my-2">
+        <tr>
+            <th>Самокат</th>
+            <th>Компания</th>
+            <th>Количество</th>
+            <th>Цена за шт.</th>
+        </tr>
+        {% for product in object.cart.user_cart.all %}
+            <tr>
+                <td>
+                    {{ product.escooter.name }}
+                </td>
+                <td>
+                    {% for name in product.escooter.manufacturer.all %}
+                        {{ name }}<br>
+                    {% endfor %}
+                </td>
+                <td>
+                    {{ product.quantity }}
+                </td>
+                <td>
+                    {{ product.escooter.price }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <table class="table my-2">
+        <tr>
+            <th>Дата создания заказа:</th>
+            <td>{{ object.created_day }}</td>
+        </tr>
+        <tr>
+            <th>Дата обновления статуса:</th>
+            <td>{{ object.updated_date }}</td>
+        </tr>
+        <tr>
+            <th>Общая сумма заказа:</th>
+            <td>{{ object.shopcart.total_cart_price }}</td>
+        </tr>
+        <tr>
+            <th>Общее количество:</th>
+            <td>{{ object.shopcart.escooters_in_cart_count }}</td>
+        </tr>
+        <tr>
+            <th>Адрес доставки:</th>
+            <td>
+                {% if object.delivery_city %}
+                        {{ object.delivery_city }}
+                {% endif %}
+                {% if object.delivery_street %}
+                    , ул. {{ object.delivery_street }}
+                {% endif %}
+                {% if object.delivery_building %}
+                    , дом {{ object.delivery_building }}
+                {% endif %}
+                {% if object.delivery_flat %}
+                    , кв. {{ object.delivery_flat }}
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>E-mail:</th>
+            <td>{{ object.email }}</td>
+        </tr>
+        <tr>
+            <th>Телефон:</th>
+            <td>{{ object.phone }}</td>
+        </tr>
+    </table>
+</div>
+{% endblock %}

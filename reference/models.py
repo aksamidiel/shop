@@ -27,12 +27,13 @@ class Series(models.Model):
         verbose_name = 'Серия'
         verbose_name_plural = 'Серии'
 
-# class OrderStatus(models.Model):
-#    status_type = models.CharField("Статус_заказа", max_length=30)
-#
-#    def __str__(self):
-#        return self.status_type
-#
-#    class Meta:
-#        verbose_name = 'Статус'
-#        verbose_name_plural = 'Статусы'
+
+class OrderStatus(models.Model):   # класс модель для заказа
+    status_type = models.CharField("Статус_заказа", max_length=30)
+
+    def __str__(self):
+        return self.status_type
+
+    class Meta:
+        verbose_name = 'Статус'
+        verbose_name_plural = 'Статусы'

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Заказ выполнен!{% endblock %}
+
+{% block form %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <H2>Ваш заказ:
+            {% if object.canceled %}
+                <p class="text-danger font-weight-bold">ОТМЕНЕН</p>
+            {% endif %}
+        </H2>
+        <table  align="center" cellpadding="5px" class="table">
+            <tr>
+                <th>Название</th>
+                <th>Компания</th>
+                <th>Кол-во</th>
+                <th>Цена за еденицу</th>
+                <th>Сумма за весь заказ</th>
+            </tr>
+            {% for product in  object.cart.user_cart.all%}
+                    <tr>
+                        <td>
+                            <a href="{% url 'escooter-detail-view' product.escooter.pk %}">{{ product.escooter.name }}</a>
+                        </td>
+                        <td>
+                            {% for name in product.escooter.manufacturer.all %}
+                                {{ name }}<br>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {{ product.quantity }}
+                        </td>
+                        <td>
+                            {{ product.escooter.price }}
+                        </td>
+                        <td>
+                            {{ product.price_total }}
+                        </td>
+                    </tr>
+            {% endfor %}
+            <tr>
+                <th>Итого к оплате:</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th>{{ object.cart.total_cart_price }}</th>
+            </tr>
+            <tr>
+                <th></th><th></th><th></th><th></th><th></th>
+            </tr>
+            <tr>
+                <th>
+                    Адрес доставки:
+                </th>
+                <th colspan="4">
+                    {% if object.delivery_city %}
+                        {{ object.delivery_city }}
+                    {% endif %}
+                    {% if object.delivery_street %}
+                        , ул. {{ object.delivery_street }}
+                    {% endif %}
+                    {% if object.delivery_building %}
+                        , дом {{ object.delivery_building }}
+                    {% endif %}
+                    {% if object.delivery_flat %}
+                        , кв. {{ object.delivery_flat }}
+                    {% endif %}
+                </th>
+            </tr>
+            <tr>
+                <th>Статус заказа:</th>
+                <td>{{ object.status }}</td>
+                <td></td>
+                <td></td>
+                <th></th>
+            </tr>
+        </table>
+    {% if object.status.pk == 1 and object.canceled == False %}
+        <a href="{% url 'order-canceled' object.pk %}" class="btn btn-danger">Отменить заказ</a>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <a href="{% url 'cart-user-list' %}" class="btn btn-primary">К списку заказов</a>
+    {% endif %}
+    </div>
+{% endblock %}
