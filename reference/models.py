@@ -5,7 +5,7 @@ from django.urls import reverse
 # Create your models here.
 
 class Manufacturer(models.Model):
-    name = models.CharField('Название _компании', null=False, blank=False, max_length=20)
+    name = models.CharField('Название_компании', null=False, blank=False, max_length=20)
     country = models.CharField("Страна", null=True, blank=True, max_length=20, default=' ')
 
     def __str__(self):  # вывод

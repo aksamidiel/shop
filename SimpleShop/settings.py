@@ -46,7 +46,8 @@ MY_APPS = [
     'reference',
     'loginsys',
     'userorder',
-    'comments'
+    'comments',
+    'homepage'
 ]
 
 

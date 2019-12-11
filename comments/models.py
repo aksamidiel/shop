@@ -22,7 +22,7 @@ class CommentProduct(models.Model):
     )
 
     created_day = models.DateTimeField(
-        'Дота комментирования',
+        'Дата комментирования',
         auto_now=False,
         auto_now_add=True
     )

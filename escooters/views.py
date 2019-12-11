@@ -14,7 +14,7 @@ from django.db.models import Q
 
 
 # Create your views here.
-def escooter_quantity_in_cart(self, context):
+def escooter_quantity_in_cart(self, context):     # количество заказов в корзине
     cart_id = self.request.session.get('cart_id', '0')
     if cart_id != '0':
         context['quantity'] = Cart.objects.get(pk=cart_id).escooters_in_cart_count
@@ -38,7 +38,7 @@ class EScooterList(ListView):
         search = self.request.GET.get('search_escooter', 0)
         if qs.filter(Q(name__icontains=search) | Q(manufacturer__icontains=search)).distinct().exists():
             return qs.filter(Q(name__icontains=search) | Q(manufacturer__icontains__icontains=search)).distinct()
-        return qs.order_by('manufacturer')
+        return qs.order_by('name')
 
 
 class EScooterDetail(DetailView):

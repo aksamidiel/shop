@@ -17,4 +17,4 @@ class ManufacturerAdmin(admin.ModelAdmin):
 
 admin.site.register(Manufacturer, ManufacturerAdmin)
 admin.site.register(Series)
-#admin.site.register(OrderStatus)
+admin.site.register(OrderStatus)

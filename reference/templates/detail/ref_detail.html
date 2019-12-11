@@ -39,18 +39,18 @@
         {% block table %}{% endblock %}
     </table>
 
-    {% if perms.books.edit_content %}
+    {% if perms.escooters.edit_content %}
         <a href="{% url update_url object.pk %}" class="btn btn-primary">Update</a>
         <a href="{% url delete_url object.pk %}" class="btn btn-danger">Delete</a>
         <input type="button" value="Back" class="btn btn-secondary" onclick="history.back();">
     {% endif %}
 
-    {% for product in object.books.all %}
+    {% for product in object.escooters.all %}
         <div class="div_table">
             <table class="second_table">
                 <tr>
                     <td width="300px" height="250px">
-                        <img src="{{ product.image.url }}" alt="Обложка книги" width="auto" height="250px">
+                        <img src="{{ product.image.url }}" alt="Изображение" width="auto" height="250px">
                     </td>
                 </tr>
                 <tr>
@@ -60,22 +60,22 @@
                 </tr>
                 <tr>
                     <td width="200px">
-                        {% for author_name in product.author.all %}
-                            {{ author_name }}
+                        {% for name in product.manufacturer.all %}
+                            {{ name }}
                         {% endfor %}
                     </td>
                 </tr>
                 <tr>
                     <td width="200px" height="40px">
-                        <a href="{% url 'book-detail-view' product.pk %}" class="btn btn-primary">Подробнее</a>
+                        <a href="{% url 'escooter-detail-view' product.pk %}" class="btn btn-primary">Подробнее</a>
                         {% if product.available %}
-                            <a href="{% url 'add-to-cart' product.pk %}?next=/books/all" class="btn btn-light">
+                            <a href="{% url 'add-to-cart' product.pk %}?next=/escooters/all" class="btn btn-light">
                                 <img src="https://img.icons8.com/doodle/24/000000/wheelbarrow.png">
                             </a>
                         {% endif %}
                         {% if perms.books.edit_content %}
-                            <a href="{% url 'book-update-view' product.pk %}"><img src="https://img.icons8.com/wired/24/000000/pencil.png"></a>
-                            <a href="{% url 'book-delete-view' product.pk %}"><img src="https://img.icons8.com/ios/24/000000/close-window-filled.png"></a>
+                            <a href="{% url 'escooter-update-view' product.pk %}"><img src="https://img.icons8.com/wired/24/000000/pencil.png"></a>
+                            <a href="{% url 'escooter-delete-view' product.pk %}"><img src="https://img.icons8.com/ios/24/000000/close-window-filled.png"></a>
                         {% endif %}
                     </td>
                 </tr>

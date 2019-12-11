@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
-from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from .models import Order
 from .forms import CheckOutOrderForm
 from django.urls import reverse_lazy
@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 
 class OrderCheckOutView(CreateView):
     model = Order
-    template_name = 'shopcart/view-cart.html'
+    template_name = 'cart/view-cart.html'
     form_class = CheckOutOrderForm
 
     def get_success_url(self):
@@ -43,19 +43,21 @@ class OrderSuccess(DetailView):
                 return context
 
 
-class OrderList(ListView):
+class OrderList(ListView, PermissionRequiredMixin):
     model = Order
     template_name = 'userorder/userorder-list.html'
+    permission_required = 'escooters.edit_order'
 
     def get_queryset(self, **kwargs):
         qs = super().get_queryset(**kwargs)
         return qs.order_by('status')
 
 
-class OrderUpdate(UpdateView):
+class OrderUpdate(UpdateView, PermissionRequiredMixin):
     model = Order
     template_name = 'userorder/userorder-update.html'
     fields = ['status']
+    permission_required = 'escooters.edit_order'
 
     def get_success_url(self):
         return reverse_lazy('userorder-list')
@@ -70,6 +72,6 @@ class OrderCanceled(UpdateView):
         self.object.canceled = True
         self.object.save()
         if self.request.user.is_authenticated:
-            return reverse_lazy('shopcart-user-list')
+            return reverse_lazy('cart-user-list')
         if self.request.user.is_anonymous:
-            return reverse_lazy('escooters-list-view')
+            return reverse_lazy('escooter-list-view')

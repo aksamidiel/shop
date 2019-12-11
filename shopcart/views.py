@@ -3,13 +3,16 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.views.generic import DeleteView
 from django.views.generic.list import ListView
-from shop.shopcart.models import EScooterInCart, Cart
-from shop.escooter.models import EScooter
+from shopcart.models import EScooterInCart, Cart
+from escooters.models import EScooter
 from .forms import AddEScooterForm
+from reference.models import OrderStatus
 from django.contrib.auth import authenticate, login
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from shop.escooter.views import escooter_quantity_in_cart
+from escooters.views import escooter_quantity_in_cart
+
+new_order_status = OrderStatus.objects.get(pk=1)
 
 
 # Create your views here.
@@ -17,7 +20,7 @@ from shop.escooter.views import escooter_quantity_in_cart
 class AddEscooterToCart(UpdateView):
     model = EScooterInCart
     form_class = AddEScooterForm
-    template_name = 'cart/add-escooters.html'
+    template_name = 'cart/add-escooter.html'
 
     def get_object(self, queryset=None):
         cart_id = self.request.session.get('cart_id')
@@ -77,7 +80,7 @@ class CartView(DetailView):
 
 class DeleteBookFromCart(DeleteView):
     model = EScooterInCart
-    template_name = 'cart/delete-escooters.html'
+    template_name = 'cart/delete-escooter.html'
 
     def get_success_url(self):
         return reverse_lazy('view-cart')

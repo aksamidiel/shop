@@ -49,7 +49,7 @@ class Cart(models.Model):  # модель корзины товаров
 
 class EScooterInCart(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, verbose_name='Корзина', related_name='user_cart')
-    escooters = models.ForeignKey(EScooter, on_delete=models.CASCADE, verbose_name='Заказ', related_name='escooter_in_cart')
+    escooter = models.ForeignKey(EScooter, on_delete=models.CASCADE, verbose_name='Заказ', related_name='escooter_in_cart')
     quantity = models.PositiveIntegerField("Количество")
 
     created_day = models.DateTimeField(
@@ -72,4 +72,4 @@ class EScooterInCart(models.Model):
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
-        unique_together = [['cart', 'escooters']]
+        unique_together = [['cart', 'escooter']]

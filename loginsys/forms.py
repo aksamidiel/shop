@@ -7,13 +7,13 @@ from django.contrib.auth.forms import UserCreationForm
 class CreateUserLoginForm(ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'fname', 'lname', 'email', 'pass']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password']
 
 
 class UpdateUserLoginForm(ModelForm):
     class Meta:
         model = User
-        fields = ['fname', 'lname', 'email']
+        fields = ['first_name', 'last_name', 'email']
 
 
 class UserCreateLoginForm(UserCreationForm):

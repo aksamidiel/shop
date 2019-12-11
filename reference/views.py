@@ -151,7 +151,7 @@ class SerieUpdate(PermissionRequiredMixin, UpdateView):
 class ManufacturerDelete(PermissionRequiredMixin, DeleteView):
     model = Manufacturer
     template_name = 'reference/form/delete_form.html'
-    #permission_required = 'manufacturer.edit_content'
+    permission_required = 'manufacturer.edit_content'
 
     def get_success_url(self):
         return reverse_lazy('manufacturer-list-view')
@@ -163,7 +163,7 @@ class ManufacturerDelete(PermissionRequiredMixin, DeleteView):
 class SerieDelete(PermissionRequiredMixin, DeleteView):
     model = Series
     template_name = 'reference/form/delete_form.html'
-    #permission_required = 'manufacturer.edit_content'
+    permission_required = 'manufacturer.edit_content'
 
     def get_success_url(self):
         return reverse_lazy('serie-list-view')

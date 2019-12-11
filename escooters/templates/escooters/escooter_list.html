@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block create %}
-    <a href="{% url 'escooter-create-view' %}" class="btn btn-success mr-sm-2">Добавить книгу</a>
+    <a href="{% url 'escooter-create-view' %}" class="btn btn-success mr-sm-2">Добавить самокат</a>
 {% endblock %}
 
 {% block content %}
@@ -39,11 +39,11 @@
                         <td width="200px" height="40px">
                             <a href="{% url 'escooter-detail-view' object.pk %}" class="btn btn-primary">Подробнее</a>
                             {% if object.available %}
-                                <a href="{% url 'add-to-cart' object.pk %}?next=/books/all" class="btn btn-light">
+                                <a href="{% url 'add-to-cart' object.pk %}?next=/escooters/all" class="btn btn-light">
                                     <img src="https://img.icons8.com/doodle/24/000000/wheelbarrow.png">
                                 </a>
                             {% endif %}
-                            {% if perms.books.edit_content %}
+                            {% if perms.escooters.edit_content %}
                                 <a href="{% url 'escooter-update-view' object.pk %}"><img src="https://img.icons8.com/wired/24/000000/pencil.png"></a>
                                 <a href="{% url 'escooter-delete-view' object.pk %}"><img src="https://img.icons8.com/ios/24/000000/close-window-filled.png"></a>
                             {% endif %}

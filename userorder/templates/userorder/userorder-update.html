@@ -19,7 +19,7 @@
         <h2 class="text-danger font-weight-bold">ОТМЕНЕН</h2>
     {% endif %}
 
-    {% if perms.escooter.edit_order %}
+    {% if perms.escooters.edit_order %}
         <div class="update_order_form">
             <form method="post">
                     {% csrf_token %}
@@ -72,7 +72,7 @@
         </tr>
         <tr>
             <th>Общее количество:</th>
-            <td>{{ object.shopcart.escooters_in_cart_count }}</td>
+            <td>{{ object.cart.escooters_in_cart_count }}</td>
         </tr>
         <tr>
             <th>Адрес доставки:</th>

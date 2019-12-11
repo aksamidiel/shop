@@ -11,4 +11,4 @@ class CommentCreate(CreateView):
     form_class = CommentCreateForm
 
     def get_success_url(self):
-        return reverse_lazy('escooters-detail-view', kwargs={'pk': self.object.commented_order.pk})
+        return reverse_lazy('escooter-detail-view', kwargs={'pk': self.object.commented_order.pk})
