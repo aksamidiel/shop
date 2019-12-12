@@ -1,5 +1,5 @@
 from django.db import models
-from shopcart.models import User
+from cart.models import User
 
 
 # Create your models here.

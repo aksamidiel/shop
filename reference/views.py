@@ -141,7 +141,7 @@ class SerieUpdate(PermissionRequiredMixin, UpdateView):
     model = Series
     template_name = 'reference/form/update_form.html'
     form_class = SerieForm
-    #permission_required = 'escooters.edit_content'
+    permission_required = 'escooters.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):

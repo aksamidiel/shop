@@ -8,13 +8,13 @@
 
     {% load crispy_forms_tags %}
 
-    {% if object.books_in_cart_count > 0 %}
+    {% if object.escooters_in_cart_count > 0 %}
         <div class="container">
             <table  align="center" cellspacing="5px" class="table table-striped">
             <thead>
                 <tr>
                     <th>№</th>
-                    <th>Книга</th>
+                    <th>Самокат</th>
                     <th>Кол-во</th>
                     <th>Цена за шт.</th>
                     <th>Цена всего</th>
@@ -24,9 +24,9 @@
                 {% for product in object.user_cart.all %}
                     <tr>
                         <td>{{ product.pk }}</td>
-                        <td>{{ product.book.name }}</td>
+                        <td>{{ product.escooter.name }}</td>
                         <td>{{ product.quantity }}</td>
-                        <td>{{ product.book.price }}</td>
+                        <td>{{ product.escooter.price }}</td>
                         <td>{{ product.price_total }}</td>
                         <td><a href="{% url 'delete-from-cart' product.pk %}" class="btn btn-danger">Удалить из корзины</a></td>
                     </tr>
@@ -36,7 +36,7 @@
                 <tr>
                     <td></td>
                     <td>Итого</td>
-                    <td>{{ object.books_in_cart_count }}</td>
+                    <td>{{ object.escooters_in_cart_count }}</td>
                     <td></td>
                     <td>{{ object.total_cart_price }}</td>
                 </tr>

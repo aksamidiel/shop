@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth import views as auth_views
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
-from shopcart.models import User
+from cart.models import User
 from django.urls import reverse_lazy
 from .forms import CreateUserLoginForm, UpdateUserLoginForm, UserCreationForm
 

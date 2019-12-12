@@ -3,7 +3,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.views.generic import DeleteView
 from django.views.generic.list import ListView
-from shopcart.models import EScooterInCart, Cart
+from cart.models import EScooterInCart, Cart
 from escooters.models import EScooter
 from .forms import AddEScooterForm
 from reference.models import OrderStatus
@@ -11,8 +11,6 @@ from django.contrib.auth import authenticate, login
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from escooters.views import escooter_quantity_in_cart
-
-new_order_status = OrderStatus.objects.get(pk=1)
 
 
 # Create your views here.
@@ -68,17 +66,8 @@ class CartView(DetailView):
         cart, created = Cart.objects.get_or_create(pk=cart_id, defaults={'user': user})
         return cart
 
-    # def get_context_data(self, **kwargs):
-    # context = super().get_context_data(**kwargs)
-    # checkout_form = CheckOutOrderForm()
-    # checkout_form.fields['cart'].initial = self.object
-    # checkout_form.fields['status'].initial = new_order_status
-    # context['form'] = checkout_form
-    # book_quantity_in_cart(self, context)
-    # return context
 
-
-class DeleteBookFromCart(DeleteView):
+class DeleteEscooterFromCart(DeleteView):
     model = EScooterInCart
     template_name = 'cart/delete-escooter.html'
 

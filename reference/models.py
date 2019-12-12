@@ -28,7 +28,19 @@ class Series(models.Model):
         verbose_name_plural = 'Серии'
 
 
-class OrderStatus(models.Model):   # класс модель для заказа
+# class Level(models.Model):
+#    name = models.CharField("Уровень", null=False, blank=False, max_length=20)
+#    description = models.TextField("Описание", null=True, blank=True)
+#
+#    def __str__(self):
+#        return self.name
+#
+#    class Meta:
+#        verbose_name = 'Уровень'
+#        verbose_name_plural = 'Уровни'
+
+
+class OrderStatus(models.Model):  # класс модель для заказа
     status_type = models.CharField("Статус_заказа", max_length=30)
 
     def __str__(self):

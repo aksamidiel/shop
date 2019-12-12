@@ -4,7 +4,9 @@
     {% load static %}
         <meta charset="UTF-8">
         <title>{% block title %}Some title{% endblock %}</title>
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous">
         {% block style %}
 
         {% endblock %}
@@ -25,12 +27,12 @@
                     </li>
                 </ul>
 
-                {% if perms.escooter.edit_content %}
+                {% if perms.escooters.edit_content %}
                     {% block create %}{% endblock %}
                 {% endif %}
 
-                {% if perms.escooter.edit_order %}
-                    <a href="{% url 'order-list' %}" class="btn btn-success mr-sm-2">Все заказы</a>
+                {% if perms.escooters.edit_order %}
+                    <a href="{% url 'userorder-list' %}" class="btn btn-success mr-sm-2">Все заказы</a>
                 {% endif %}
 
                 {% if user.is_authenticated %}

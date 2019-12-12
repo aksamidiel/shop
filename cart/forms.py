@@ -6,5 +6,5 @@ from .models import *
 class AddEScooterForm(ModelForm):
     class Meta:
         model = EScooterInCart
-        fields = ['cart', 'escooters', 'quantity']
-        widgets = {'cart': forms.HiddenInput, 'escooters': forms.HiddenInput}
+        fields = ['cart', 'escooter', 'quantity']
+        widgets = {'cart': forms.HiddenInput, 'escooter': forms.HiddenInput}

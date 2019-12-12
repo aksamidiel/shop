@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from shopcart.models import User
+from cart.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 

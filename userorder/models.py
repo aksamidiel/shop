@@ -1,5 +1,5 @@
 from django.db import models
-from shopcart.models import Cart
+from cart.models import Cart
 from reference.models import OrderStatus
 
 

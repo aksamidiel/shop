@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from comments.forms import CommentCreateForm
-from shopcart.models import Cart
+from cart.models import Cart
 from .models import EScooter
 from .forms import EScooterForm
 from django.db.models import Q

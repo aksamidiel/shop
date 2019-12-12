@@ -31,8 +31,8 @@
         </tr>
         <tr>
             <td height="70px">
-                {% for manufac in object.manufacturer.all %}
-                    <h4>{{ manufac }}</h4>
+                {% for name in object.manufacturer.all %}
+                    <h4>{{ name }}</h4>
                 {% endfor %}
             </td>
         </tr>
@@ -82,15 +82,11 @@
         </tr>
         <tr>
             <th>Кол-во</th>
-            <td>{{ object.book_amount }}</td>
+            <td>{{ object.escooter_amount }}</td>
         </tr>
         <tr>
             <th>Вес</th>
             <td>{{ object.weight }}</td>
-        </tr>
-        <tr>
-            <th>Кол-во</th>
-            <td>{{ object.book_amount }}</td>
         </tr>
         <tr>
             <th>Наличие</th>
