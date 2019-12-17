@@ -36,8 +36,8 @@ class EScooterList(ListView):
     def get_queryset(self, **kwargs):
         qs = super().get_queryset(**kwargs)
         search = self.request.GET.get('search_escooter', 0)
-        if qs.filter(Q(name__icontains=search) | Q(manufacturer__icontains=search)).distinct().exists():
-            return qs.filter(Q(name__icontains=search) | Q(manufacturer__icontains__icontains=search)).distinct()
+        if qs.filter(Q(name__icontains=search) | Q(manufacturer__name__icontains=search)).distinct().exists():
+            return qs.filter(Q(name__icontains=search) | Q(manufacturer__name__icontains=search)).distinct()
         return qs.order_by('name')
 
 

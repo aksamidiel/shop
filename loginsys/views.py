@@ -10,13 +10,12 @@ from .forms import CreateUserLoginForm, UpdateUserLoginForm, UserCreationForm
 
 
 # Create your views here.
-
 class LoginViewPage(auth_views.LoginView):
     template_name = 'loginsys/login.html'
 
 
 class LogoutViewPage(auth_views.LogoutView):
-    extra_context = 'None'
+    extra_context = 'none'
 
 
 class PasswordResetViewPage(auth_views.PasswordResetView):
@@ -34,8 +33,8 @@ class PasswordResetConfirmViewPage(auth_views.PasswordResetConfirmView):
 class CreateUser(CreateView):
     model = User
     template_name = 'loginsys/registration/create_user.html'
-    form_class = CreateUserLoginForm
     form_class = UserCreationForm
+    #form_class = CreateUserLoginForm
     success_url = reverse_lazy('log-in')
 
 

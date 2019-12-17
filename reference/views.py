@@ -148,6 +148,7 @@ class SerieUpdate(PermissionRequiredMixin, UpdateView):
             return reverse_lazy('serie-detail-view', kwargs={'pk': self.object.pk})
         return reverse_lazy('serie-list-view')
 
+
 class ManufacturerDelete(PermissionRequiredMixin, DeleteView):
     model = Manufacturer
     template_name = 'reference/form/delete_form.html'
@@ -159,6 +160,7 @@ class ManufacturerDelete(PermissionRequiredMixin, DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return get_cancel_url(self, context)
+
 
 class SerieDelete(PermissionRequiredMixin, DeleteView):
     model = Series
