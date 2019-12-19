@@ -73,7 +73,7 @@
                                 <img src="https://img.icons8.com/doodle/24/000000/wheelbarrow.png">
                             </a>
                         {% endif %}
-                        {% if perms.books.edit_content %}
+                        {% if perms.escooters.edit_content %}
                             <a href="{% url 'escooter-update-view' product.pk %}"><img src="https://img.icons8.com/wired/24/000000/pencil.png"></a>
                             <a href="{% url 'escooter-delete-view' product.pk %}"><img src="https://img.icons8.com/ios/24/000000/close-window-filled.png"></a>
                         {% endif %}

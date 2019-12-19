@@ -37,7 +37,7 @@ class ManufacturerDetail(TemplateView):
         context['update_url'] = 'manufacturer-update-view'
         context['delete_url'] = 'manufacturer-delete-view'
         manufacturer_pk = self.kwargs.get('pk')
-        # context['logout_redirect'] = '/refs/author/{}'.format(author_pk)
+        context['logout_redirect'] = '/refs/manufacturer/{}'.format(manufacturer_pk)
         escooter_quantity_in_cart(self, context)
         return context
 
@@ -51,7 +51,7 @@ class SerieDetail(DetailView):
         context['update_url'] = 'serie-update-view'
         context['delete_url'] = 'serie-delete-view'
         serie_pk = self.kwargs.get('pk')
-        # context['logout_redirect'] = '/refs/serie/{}'.format(serie_pk)
+        context['logout_redirect'] = '/refs/serie/{}'.format(serie_pk)
         escooter_quantity_in_cart(self, context)
         return context
 
@@ -70,7 +70,7 @@ class ManufacturerList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['logout_redirect'] = '/refs/author'
+        context['logout_redirect'] = '/refs/author'
         escooter_quantity_in_cart(self, context)
         return context
 
@@ -89,7 +89,7 @@ class SerieList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['logout_redirect'] = '/refs/serie'
+        context['logout_redirect'] = '/refs/serie'
         escooter_quantity_in_cart(self, context)
         return context
 
@@ -99,7 +99,7 @@ class ManufacturerCreate(PermissionRequiredMixin, CreateView):
     template_name = 'reference/form/create_form.html'
     form_class = ManufacturerForm
 
-    # permission_required = 'escooters.edit_content'
+    permission_required = 'escooters.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -114,7 +114,7 @@ class SerieCreate(PermissionRequiredMixin, CreateView):
     template_name = 'reference/form/create_form.html'
     form_class = SerieForm
 
-    # permission_required = 'escooters.edit_content'
+    permission_required = 'escooters.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -128,8 +128,7 @@ class ManufacturerUpdate(PermissionRequiredMixin, UpdateView):
     model = Manufacturer
     template_name = 'reference/form/update_form.html'
     form_class = ManufacturerForm
-
-    # permission_required = 'escooters.edit_content'
+    permission_required = 'escooters.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):

@@ -28,7 +28,7 @@ class CommentProduct(models.Model):
     )
 
     def __str__(self):
-        return 'коммент заказчика {} о товаре {}'.format(self.comm)
+        return 'коммент заказчика {} о товаре {}'.format(self.commented_user, self.commented_order)
 
     class Meta:
         verbose_name = 'Коммент'

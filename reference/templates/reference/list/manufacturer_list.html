@@ -6,7 +6,7 @@
 
 {% block caption %} Компании {% endblock %}
 
-{% block detail %}<a href="{% url 'manufacturer-detail-view' object.pk %}"> {{ object.name }} {{ object.country }}</a>{% endblock %}
+{% block detail %}<a href="{% url 'manufacturer-detail-view' object.pk %}"> {{ object.name }}</a>{% endblock %}
 
 {% block detail_two %}<a href="{% url 'manufacturer-detail-view' object.pk %}">{% endblock %}
 
